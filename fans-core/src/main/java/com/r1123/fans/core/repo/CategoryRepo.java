@@ -13,4 +13,6 @@ import java.io.Serializable;
 @Repository("bsCategoryRepos")
 public interface CategoryRepo extends JpaRepository<Category,Long>,JpaSpecificationExecutor<Category>,Serializable {
 
+
+
 }

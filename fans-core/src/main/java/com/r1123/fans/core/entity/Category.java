@@ -1,6 +1,5 @@
 package com.r1123.fans.core.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.r1123.fans.core.type.CategoryType;
 import lombok.Getter;
@@ -149,6 +148,20 @@ public class Category {
             }
         }
         return Collections.unmodifiableList(childCategory);
+    }
+
+    public List<Category> getAllparents(){
+        List<CategoryXref> xrefs = getAllParentCategoryXrefs();
+        List<Category> parents;
+        if (CollectionUtils.isEmpty(xrefs)){
+            parents = Collections.emptyList();
+        }else {
+            parents = new ArrayList<Category>(xrefs.size());
+            for (CategoryXref x: xrefs){
+                parents.add(x.getCategory());
+            }
+        }
+        return parents;
     }
 
     public Category getParentCategory() {

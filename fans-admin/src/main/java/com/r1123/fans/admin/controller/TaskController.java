@@ -2,7 +2,6 @@ package com.r1123.fans.admin.controller;
 
 import com.r1123.fans.admin.form.CategoryForm;
 import com.r1123.fans.admin.service.CategoryService;
-import com.r1123.fans.core.common.GlobalErrorCode;
 import com.r1123.fans.core.entity.Category;
 import com.r1123.fans.core.repo.CategoryRepo;
 import com.r1123.fans.core.repo.CategoryXrefRepo;
@@ -40,30 +39,8 @@ public class TaskController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     private Map<String, Object> hello(@Valid CategoryForm categoryForm){
-        Long[] parents = categoryForm.getParent();
-        Set<Category> parentCategories = new HashSet<Category>();
-        Map<String, Object> result = new HashMap(2);
-        Category parentCategory;
-        if (parents != null){
-            for (Long p : parents){
-                parentCategory = categoryService.find(p);
-                if (parentCategory == null){
-                    result.put("err", GlobalErrorCode.NOT_FOUND);
-                    result.put("msg", "父级类目不存在");
-                    return result;
-                }
-                parentCategories.add(parentCategory);
-            }
-        }
-        Category category = categoryForm.getBasiCategory();
-        try{
-            category = categoryService.save(category, parentCategories);
-            result.put("err", GlobalErrorCode.SUCESS);
-        }catch (Exception e){
-            result.put("err", GlobalErrorCode.INTERNAL_ERROR);
-            result.put("msg", "服务器报错");
-        }
-        return result;
+
+        return null;
     }
 
     @GetMapping("/list")

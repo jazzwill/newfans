@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class CategoryForm {
 
+    private Long id;
+
     @NotBlank
     private String name;
 
@@ -38,6 +40,15 @@ public class CategoryForm {
         category.setDisplayOrder(displayOrder);
         category.setIsOnShow(isOnShow);
         category.setCategoryType(CategoryType.getInstance(type));
+        return category;
+    }
+
+    public Category getCategory(CategoryForm categoryForm, Category category) {
+        if (category != null){
+            category.setIsOnShow(isOnShow);
+            category.setName(name);
+            category.setDisplayOrder(displayOrder);
+        }
         return category;
     }
 }
